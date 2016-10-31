@@ -84,27 +84,27 @@ test "room.available, when available",
   )
 
 test "room.available, when not leading conflict",
-expected = false,
-actual   = (
-  guest, room, reservation =
-    create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
-  room.available?(start_date: DateTime.now + 90, end_date: DateTime.now + 105)
+  expected = false,
+  actual   = (
+    guest, room, reservation =
+      create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
+    room.available?(start_date: DateTime.now + 90, end_date: DateTime.now + 105)
 )
 
 test "room.available, when not trailing conflict",
-expected = false,
-actual   = (
-  guest, room, reservation =
-    create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
-  room.available?(start_date: DateTime.now + 105, end_date: DateTime.now + 115)
+  expected = false,
+  actual   = (
+    guest, room, reservation =
+      create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
+    room.available?(start_date: DateTime.now + 105, end_date: DateTime.now + 115)
 )
 
 test "room.available, when not outside conflict",
-expected = false,
-actual   = (
-  guest, room, reservation =
-    create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
-  room.available?(start_date: DateTime.now + 95, end_date: DateTime.now + 115)
+  expected = false,
+  actual   = (
+    guest, room, reservation =
+      create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
+    room.available?(start_date: DateTime.now + 95, end_date: DateTime.now + 115)
 )
 
 test "room.available, when not inside conflict",
