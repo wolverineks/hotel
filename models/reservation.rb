@@ -1,7 +1,9 @@
 class Reservation
   attr_accessor :start_date, :end_date, :guest, :room
 
+  # Count of all instances of class, also used for instance ID
   @@count = 0
+  # Array of all instances of class
   @@all   = []
 
   def initialize(args)
@@ -15,6 +17,7 @@ class Reservation
     add_to_guest_and_room(guest: args[:guest], room: args[:room])
   end
 
+  # Associates all 3 instances with each other
   def add_to_guest_and_room(guest:, room:)
     room.guests << guest
     guest.rooms << room
@@ -22,12 +25,14 @@ class Reservation
     room.reservations << self
   end
 
-  def self.all
-    @@all
-  end
-
+  # Class method to access total count of class instances
   def self.count
     @@count
+  end
+
+  # Class method to access array or all instances of class
+  def self.all
+    @@all
   end
 
 end

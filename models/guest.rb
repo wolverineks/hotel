@@ -3,7 +3,9 @@ class Guest
 
   attr_accessor :first_name, :last_name, :full_name, :reservations, :rooms
 
+  # Count of all instances of class, also used for instance ID
   @@count = 0
+  # Array of all instances of class
   @@all   = []
 
   def initialize(args)
@@ -16,10 +18,12 @@ class Guest
     @id = self.class.count
   end
 
+  # Simple full name concatenation
   def full_name
     first_name + " " + last_name
   end
 
+  # Create reservation, add reservation and rooms to instance's reservations and rooms
   def reserve(room:, start_time:, end_time:)
     reservation =
       Reservation.new(
@@ -34,10 +38,12 @@ class Guest
     reservation
   end
 
+  # Class method to access total count of class instances
   def self.count
     @@count
   end
 
+  # Class method to access array or all instances of class
   def self.all
     @@all
   end

@@ -67,6 +67,9 @@ test "room.guests, with reservations",
     room.guests == [guest]
   )
 
+#### Tests methods used for checking room availablility ######################
+
+# Check the availablility of a room that has a reservation after the desired date range
 test "room.available, when available",
   expected = true,
   actual   = (
@@ -75,6 +78,7 @@ test "room.available, when available",
     room.available?(start_date: DateTime.now + 10, end_date: DateTime.now + 15)
   )
 
+# Check the availablility of a room that has a reservation before the desired date range
 test "room.available, when available",
   expected = true,
   actual   = (
@@ -83,6 +87,7 @@ test "room.available, when available",
     room.available?(start_date: DateTime.now + 150, end_date: DateTime.now + 160)
   )
 
+# Check the availablility of a room for a desired date range that overlaps the start of an existing reservation
 test "room.available, when not leading conflict",
   expected = false,
   actual   = (
@@ -91,6 +96,7 @@ test "room.available, when not leading conflict",
     room.available?(start_date: DateTime.now + 90, end_date: DateTime.now + 105)
 )
 
+# Check the availablility of a room for a desired date range that overlaps the end of an existing reservation
 test "room.available, when not trailing conflict",
   expected = false,
   actual   = (
@@ -99,6 +105,7 @@ test "room.available, when not trailing conflict",
     room.available?(start_date: DateTime.now + 105, end_date: DateTime.now + 115)
 )
 
+# Check the availablility of a room for a desired date range that overlaps both the start and the end of an existing reservation
 test "room.available, when not outside conflict",
   expected = false,
   actual   = (
@@ -107,18 +114,20 @@ test "room.available, when not outside conflict",
     room.available?(start_date: DateTime.now + 95, end_date: DateTime.now + 115)
 )
 
+# Check the availablility of a room for a desired date range that overlaps neither the start nor the end of an existing reservation
 test "room.available, when not inside conflict",
-expected = false,
-actual   = (
-  guest, room, reservation =
-    create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
-  room.available?(start_date: DateTime.now + 105, end_date: DateTime.now + 107)
+  expected = false,
+  actual   = (
+    guest, room, reservation =
+      create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
+    room.available?(start_date: DateTime.now + 105, end_date: DateTime.now + 107)
 )
 
+# Check the availability of a room using 'booked?' instead of 'available?'
 test "room.booked, when booked",
-expected = true,
-actual   = (
-  guest, room, reservation =
-    create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
-  room.booked?(start_date: DateTime.now + 105, end_date: DateTime.now + 107)
+  expected = true,
+  actual   = (
+    guest, room, reservation =
+      create_trio(start_date: DateTime.now + 100, end_date: DateTime.now + 110)
+    room.booked?(start_date: DateTime.now + 105, end_date: DateTime.now + 107)
 )
