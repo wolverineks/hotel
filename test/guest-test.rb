@@ -81,7 +81,7 @@ test "guest.reserve(room)",
   actual   = (
     guest = create_guest
     room  = create_room
-    guest.reserve(room: room, start_time: DateTime.now + 1, end_time: DateTime.now + 2).class
+    guest.reserve(room: room, start_date: DateTime.now + 1, end_date: DateTime.now + 2).class
   )
 
 test "guest.reservations, with reservations",
@@ -89,7 +89,7 @@ test "guest.reservations, with reservations",
   actual   = (
     guest = create_guest
     room  = create_room
-    reservation = guest.reserve(room: room, start_time: DateTime.now + 1, end_time: DateTime.now + 2)
+    reservation = guest.reserve(room: room, start_date: DateTime.now + 1, end_date: DateTime.now + 2)
 
     guest.reservations.first == reservation
   )
@@ -99,7 +99,7 @@ test "guest.rooms, with reservations",
   actual   = (
     guest = create_guest
     room  = create_room
-    guest.reserve(room: room, start_time: DateTime.now + 1, end_time: DateTime.now + 2)
+    guest.reserve(room: room, start_date: DateTime.now + 1, end_date: DateTime.now + 2)
 
     guest.rooms.first == room
   )

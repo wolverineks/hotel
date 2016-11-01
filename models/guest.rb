@@ -29,8 +29,8 @@ class Guest
       Reservation.new(
         guest: self,
         room: room,
-        start_date: start_time,
-        end_date: end_time
+        start_date: start_date,
+        end_date: end_date
       )
     reservations << reservation
     rooms << room
