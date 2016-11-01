@@ -1,7 +1,7 @@
 class Guest
   require './models/reservation.rb'
 
-  attr_accessor :first_name, :last_name, :full_name, :reservations, :rooms
+  attr_accessor :id, :first_name, :last_name, :full_name, :reservations, :rooms
 
   # Count of all instances of class, also used for instance ID
   @@count = 0

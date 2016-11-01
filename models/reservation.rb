@@ -1,5 +1,5 @@
 class Reservation
-  attr_accessor :start_date, :end_date, :guest, :room
+  attr_accessor :id, :start_date, :end_date, :guest, :room
 
   # Count of all instances of class, also used for instance ID
   @@count = 0
