@@ -1,5 +1,6 @@
 class Reservation
-  attr_accessor :id, :start_date, :end_date, :guest, :room
+  # getter methods
+  attr_reader :id, :guest_id, :room_id, :start_date, :end_date
 
   # Count of all instances of class, also used for instance ID
   @@count = 0
@@ -7,22 +8,27 @@ class Reservation
   @@all   = []
 
   def initialize(args)
-    @guest      = args[:guest]
-    @room       = args[:room]
+    # add foreign keys
+    @guest_id   = args[:guest_id]
+    @room_id    = args[:room_id]
+
     @start_date = args[:start_date]
     @end_date   = args[:end_date]
-    @@count += 1
+
+    # used for accessing all instances of class
     @@all << self
+
+    # used for setting id of instance
+    @@count += 1
     @id = self.class.count
-    add_to_guest_and_room(guest: args[:guest], room: args[:room])
   end
 
-  # Associates all 3 instances with each other
-  def add_to_guest_and_room(guest:, room:)
-    room.guests << guest
-    guest.rooms << room
-    guest.reservations << self
-    room.reservations << self
+  def guest
+    Guest.all.find { |guest| guest.id == guest_id }
+  end
+
+  def room
+    Room.all.find { |room| room.id == room_id }
   end
 
   # Class method to access total count of class instances

@@ -34,7 +34,7 @@ test "Reservation.all, when no reservations exist",
 test "Reservation.all, when reservations exist",
   expected = true,
   actual   = (
-    guest, room, reservation = create_trio
+    guest_id, room_id, reservation = create_trio
     reservations = Reservation.all
     reservations.include?(reservation)
   )
@@ -57,12 +57,12 @@ test "reservation.guest",
   expected = true,
   actual   = (
     guest, room, reservation = create_trio
-    reservation.guest == guest
+    reservation.guest.id == guest.id
   )
 
-test "reservation.guest",
+test "reservation.room",
   expected = true,
   actual   = (
     guest, room, reservation = create_trio
-    reservation.room == room
+    reservation.room.id == room.id
   )

@@ -12,19 +12,19 @@ module Factory
     Room.new
   end
 
-  def create_reservation(guest:, room:, start_date:, end_date:)
+  def create_reservation(guest_id:, room_id:, start_date:, end_date:)
     Reservation.new(
-      guest: guest,
-      room: room,
+      guest_id: guest_id,
+      room_id: room_id,
       start_date: start_date,
       end_date: end_date
     )
   end
 
-  def create_trio(guest: create_guest, room: create_room, start_date: DateTime.now + 1, end_date: DateTime.now + 2)
+  def create_trio(guest_id: create_guest.id, room_id: create_room.id, start_date: DateTime.now + 1, end_date: DateTime.now + 2)
     guest = create_guest
     room  = create_room
-    reservation = create_reservation(guest: guest, room: room, start_date: start_date, end_date: end_date)
+    reservation = create_reservation(guest_id: guest.id, room_id: room.id, start_date: start_date, end_date: end_date)
     [guest, room, reservation]
   end
 

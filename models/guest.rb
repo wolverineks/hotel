@@ -1,7 +1,8 @@
 class Guest
   require './models/reservation.rb'
 
-  attr_accessor :id, :first_name, :last_name, :full_name, :reservations, :rooms
+  # getter methods
+  attr_reader :id, :first_name, :last_name, :full_name
 
   # Count of all instances of class, also used for instance ID
   @@count = 0
@@ -11,10 +12,12 @@ class Guest
   def initialize(args)
     @first_name = args[:first_name]
     @last_name  = args[:last_name]
-    @reservations = []
-    @rooms = []
-    @@count += 1
+
+    # used for accessing all instances of class
     @@all << self
+
+    # used for setting id of instance
+    @@count += 1
     @id = self.class.count
   end
 
@@ -24,18 +27,25 @@ class Guest
   end
 
   # Create reservation, add reservation and rooms to instance's reservations and rooms
-  def reserve(room:, start_date:, end_date:)
-    reservation =
-      Reservation.new(
-        guest: self,
-        room: room,
-        start_date: start_date,
-        end_date: end_date
-      )
-    reservations << reservation
-    rooms << room
+  def reserve(room_id:, start_date:, end_date:)
+    Reservation.new(
+      guest_id: id,
+      room_id: room_id,
+      start_date: start_date,
+      end_date: end_date
+    )
+  end
 
-    reservation
+  def reservations
+    Reservation.all.find_all { |reservation| reservation.guest_id == id }
+  end
+
+  def room_ids
+    reservations.map { |reservation| reservation.room_id }
+  end
+
+  def rooms
+    Room.all.find_all { |room| room_ids.include?(room.id) }
   end
 
   # Class method to access total count of class instances

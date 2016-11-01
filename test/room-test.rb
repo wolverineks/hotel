@@ -57,14 +57,14 @@ test "room.reservations, with reservations",
   expected = true,
   actual   = (
     guest, room, reservation = create_trio
-    room.reservations == [reservation]
+    room.reservations.include?(reservation)
   )
 
 test "room.guests, with reservations",
   expected = true,
   actual   = (
     guest, room, reservation = create_trio
-    room.guests == [guest]
+    room.guests.include?(guest)
   )
 
 #### Tests methods used for checking room availablility ######################

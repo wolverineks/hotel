@@ -1,5 +1,9 @@
 class Room
-  attr_accessor :id, :reservations, :guests
+  require "./models/guest.rb"
+  require "./models/reservation.rb"
+
+  # getter method
+  attr_reader :id
 
   # Count of all instances of class, also used for instance ID
   @@count = 0
@@ -7,11 +11,24 @@ class Room
   @@all   = []
 
   def initialize()
-    @reservations = []
-    @guests = []
-    @@count += 1
+    # used for accessing all instances of class
     @@all << self
+
+    # used for setting id of instance
+    @@count += 1
     @id = self.class.count
+  end
+
+  def reservations
+    Reservation.all.find_all { |reservation| reservation.room_id == id }
+  end
+
+  def guest_ids
+    reservations.map { |reservation| reservation.guest_id }
+  end
+
+  def guests
+    Guest.all.find_all { |guest| guest_ids.include?(guest.id) }
   end
 
   # Iterate through all of the rooms reservations, and check if there is any overlap
