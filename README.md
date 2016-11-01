@@ -34,6 +34,10 @@ ruby test/reservation-test.rb
 
 The demo will print to the screen an example of creating a guest, creating a room, and then checking the room's availability in severals cases. Each case is checked using the same algorithm.
 ```
+def reservations
+  Reservation.all.find_all { |reservation| reservation.room_id == id }
+end
+
 # Iterate through all of the rooms reservations, and check if there is any overlap
 def available?(start_date:, end_date:)
   !reservations.any? { |r| r.start_date <= end_date && r.end_date >= start_date }
