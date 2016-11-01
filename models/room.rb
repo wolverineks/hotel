@@ -19,14 +19,17 @@ class Room
     @id = self.class.count
   end
 
+  # Array of all reservations associated with an instance of class
   def reservations
     Reservation.all.find_all { |reservation| reservation.room_id == id }
   end
 
+  # Array of guest ids associated with associated reservations
   def guest_ids
     reservations.map { |reservation| reservation.guest_id }
   end
 
+  # Array of guests associated with associated reservations
   def guests
     Guest.all.find_all { |guest| guest_ids.include?(guest.id) }
   end

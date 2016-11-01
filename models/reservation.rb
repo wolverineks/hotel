@@ -23,10 +23,12 @@ class Reservation
     @id = self.class.count
   end
 
+  # Guest associated with instance of class
   def guest
     Guest.all.find { |guest| guest.id == guest_id }
   end
 
+  # Room associated with instance of class
   def room
     Room.all.find { |room| room.id == room_id }
   end
