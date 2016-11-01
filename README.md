@@ -18,7 +18,7 @@ However, upon further inspection, I have discovered that there are not 4 separat
 
 In the Room class, there is a simple algorithm that will check for availability.
 
-The use specifies a desired room and date range. The algorithm then iterates over all of the reservations associated with the given room, and check if there is any overlap of the existing date ranges and the desired date range.
+The user specifies a desired room and date range. The algorithm then iterates over all of the reservations associated with the given room, and check if there is any overlap of the existing date ranges and the desired date range.
 
 ### Tests
 
