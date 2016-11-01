@@ -24,13 +24,13 @@ class Guest
   end
 
   # Create reservation, add reservation and rooms to instance's reservations and rooms
-  def reserve(room:, start_time:, end_time:)
+  def reserve(room:, start_date:, end_date:)
     reservation =
       Reservation.new(
         guest: self,
         room: room,
-        start_time: start_time,
-        end_time: end_time
+        start_date: start_time,
+        end_date: end_time
       )
     reservations << reservation
     rooms << room
